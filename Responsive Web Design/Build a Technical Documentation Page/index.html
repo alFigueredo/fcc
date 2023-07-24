@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Build a Technical Documentation Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <nav id="navbar">
+    <header>
+      <h1><a href="#main-doc">NumPy quickstart: The Basics</a></h1>
+    </header>
+    <ul>
+      <li>
+        <a class="nav-link" href="#An_example">An example</a>
+      </li>
+      <li>
+        <a class="nav-link" href="#Array_Creation">Array Creation</a>
+      </li>
+      <li>
+        <a class="nav-link" href="#Printing_Arrays">Printing Arrays</a>
+      </li>
+      <li>
+        <a class="nav-link" href="#Basic_Operations">Basic Operations</a>
+      </li>
+      <li>
+        <a class="nav-link" href="#Universal_Functions">Universal Functions</a>
+      </li>
+      <li>
+        <a class="nav-link" href="#Indexing,_Slicing_and_Iterating">Indexing, Slicing and Iterating</a>
+      </li>
+      <li>
+        <a class="nav-link" href="#Reference">Reference</a>
+      </li>
+    </ul>
+  </nav>
+  <main id="main-doc">
+    <header>
+      <h1>NumPy quickstart: The Basics</h1>
+    </header>
+    <article>
+      <p>
+        NumPy&#39;s main object is the homogeneous multidimensional array. It is
+        a table of elements (usually numbers), all of the same type, indexed
+        by a tuple of non-negative integers. In NumPy dimensions are called
+        axes.
+      </p>
+      <p>
+        For example, the array for the coordinates of a point in 3D space,
+        [1, 2, 1], has one axis. That axis has 3 elements in it, so we say
+        it has a length of 3. In the example pictured below, the array has 2
+        axes. The first axis has a length of 2, the second axis has a length
+        of 3.
+      </p>
+      <code>[[1., 0., 0.],<br />&nbsp;[0., 1., 2.]]</code>
+      <p>
+        NumPy&#39;s array class is called ndarray. It is also known by the alias
+        array. Note that numpy.array is not the same as the Standard Python
+        Library class array.array, which only handles one-dimensional arrays
+        and offers less functionality. The more important attributes of an
+        ndarray object are:
+      </p>
+      <dl>
+        <dt>ndarray.ndim</dt>
+        <dd>
+          <p>The number of axes (dimensions) of the array.</p>
+        </dd>
+        <dt>ndarray.shape</dt>
+        <dd>
+          <p>
+            The dimensions of the array. This is a tuple of integers
+            indicating the size of the array in each dimension. For a matrix
+            with n rows and m columns, shape will be (n,m). The length of
+            the shape tuple is therefore the number of axes, ndim.
+          </p>
+        </dd>
+        <dt>ndarray.size</dt>
+        <dd>
+          <p>
+            The total number of elements of the array. This is equal to the
+            product of the elements of shape.
+          </p>
+        </dd>
+        <dt>ndarray.dtype</dt>
+        <dd>
+          <p>
+            An object describing the type of the elements in the array. One
+            can create or specify dtype&#39;s using standard Python types.
+            Additionally NumPy provides types of its own. numpy.int32,
+            numpy.int16, and numpy.float64 are some examples.
+          </p>
+        </dd>
+        <dt>ndarray.itemsize</dt>
+        <dd>
+          <p>
+            The size in bytes of each element of the array. For example, an
+            array of elements of type float64 has itemsize 8 (=64/8), while
+            one of type complex32 has itemsize 4 (=32/8). It is equivalent
+            to ndarray.dtype.itemsize.
+          </p>
+        </dd>
+        <dt>ndarray.data</dt>
+        <dd>
+          <p>
+            The buffer containing the actual elements of the array.
+            Normally, we won&#39;t need to use this attribute because we will
+            access the elements in an array using indexing facilities.
+          </p>
+        </dd>
+      </dl>
+      <section class="main-section" id="An_example">
+        <header>
+          An example
+        </header>
+        <article>
+          <code>&gt;&gt;&gt; import numpy as np<br />&gt;&gt;&gt; a =
+            np.arange(15).reshape(3, 5)<br />&gt;&gt;&gt; a<br />array([[ 0, 1, 2, 3, 4],<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[
+            5, 6, 7, 8, 9],<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[10,
+            11, 12, 13, 14]])<br />&gt;&gt;&gt; a.shape<br />(3, 5)<br />&gt;&gt;&gt;
+            a.ndim<br />2<br />&gt;&gt;&gt; a.dtype.name<br />&#39;int64&#39;<br />&gt;&gt;&gt;
+            a.itemsize<br />8<br />&gt;&gt;&gt; a.size<br />15<br />&gt;&gt;&gt;
+            type(a)<br />&lt;class &#39;numpy.ndarray&#39;&gt;<br />&gt;&gt;&gt; b =
+            np.array([6, 7, 8])<br />
+            &gt;&gt;&gt; b<br />array([6, 7, 8])<br />&gt;&gt;&gt; type(b)<br />&lt;class
+            &#39;numpy.ndarray&#39;&gt;</code>
+        </article>
+      </section>
+      <section class="main-section" id="Array_Creation">
+        <header>
+          Array Creation
+        </header>
+        <article>
+          <p>There are several ways to create arrays.</p>
+          <p>
+            For example, you can create an array from a regular Python list or
+            tuple using the array function. The type of the resulting array is
+            deduced from the type of the elements in the sequences.
+          </p>
+          <code>&gt;&gt;&gt; import numpy as np<br />&gt;&gt;&gt; a = np.array([2,
+            3, 4])<br />&gt;&gt;&gt; a<br />array([2, 3, 4])<br />&gt;&gt;&gt;
+            a.dtype<br />
+            dtype(&#39;int64&#39;)<br />&gt;&gt;&gt; b = np.array([1.2, 3.5, 5.1])<br />&gt;&gt;&gt;
+            b.dtype<br />dtype(&#39;float64&#39;)</code>
+          <p>A frequent error consists in calling array with multiple arguments, rather than providing a single
+            sequence as an argument.</p>
+          <code>&gt;&gt;&gt; a = np.array(1, 2, 3, 4)&nbsp;&nbsp;&nbsp;&nbsp;# WRONG<br />Traceback (most recent call last):<br />&nbsp;&nbsp;...<br />TypeError: array() takes from 1 to 2 positional arguments but 4 were given<br />&gt;&gt;&gt; a = np.array([1, 2, 3, 4])&nbsp;&nbsp;# RIGHT</code>
+          <p>array transforms sequences of sequences into two-dimensional arrays, sequences of sequences of sequences
+            into three-dimensional arrays, and so on.</p>
+          <code>&gt;&gt;&gt; b = np.array([(1.5, 2, 3), (4, 5, 6)])<br />&gt;&gt;&gt; b<br />array([[1.5, 2. , 3. ],<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4. , 5. , 6. ]])</code>
+          <p>The type of the array can also be explicitly specified at creation time:</p>
+          <code>>&gt;&gt;&gt; c = np.array([[1, 2], [3, 4]], dtype=complex)<br>&gt;&gt;&gt; c<br>array([[1.+0.j, 2.+0.j],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.+0.j, 4.+0.j]])</code>
+          <p>Often, the elements of an array are originally unknown, but its size is
+            known. Hence, NumPy offers several functions to create
+            arrays with initial placeholder content. These minimize the necessity of
+            growing arrays, an expensive operation.</p>
+          <p>The function zeros creates an array full of zeros, the function
+            ones creates an array full of ones, and the function empty
+            creates an array whose initial content is random and depends on the
+            state of the memory. By default, the dtype of the created array is
+            float64, but it can be specified via the key word argument dtype.</p>
+          <code>&gt;&gt;&gt; np.zeros((3, 4))<br>array([[0., 0., 0., 0.],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0., 0., 0., 0.],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0., 0., 0., 0.]])<br>&gt;&gt;&gt; np.ones((2, 3, 4), dtype=np.int16)<br>array([[[1, 1, 1, 1],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1, 1, 1, 1],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1, 1, 1, 1]],<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[1, 1, 1, 1],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1, 1, 1, 1],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1, 1, 1, 1]]], dtype=int16)<br>&gt;&gt;&gt; np.empty((2, 3))<br>array([[3.73603959e-262, 6.02658058e-154, 6.55490914e-260],&nbsp;&nbsp;# may vary<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[5.30498948e-313, 3.14673309e-307, 1.00000000e+000]])</code>
+          <p>To create sequences of numbers, NumPy provides the arange function which is analogous to the Python
+            built-in range, but returns an array.</p>
+          <code>&gt;&gt;&gt; np.arange(10, 30, 5)<br>array([10, 15, 20, 25])<br>&gt;&gt;&gt; np.arange(0, 2, 0.3)&nbsp;&nbsp;# it accepts float arguments<br>array([0. , 0.3, 0.6, 0.9, 1.2, 1.5, 1.8])</code>
+          <p>When arange is used with floating point arguments, it is generally not possible to predict the number of
+            elements obtained, due to the finite floating point precision. For this reason, it is usually better to
+            use the function linspace that receives as an argument the number of elements that we want, instead of the
+            step:</p>
+          <code>&gt;&gt;&gt; from numpy import pi<br>&gt;&gt;&gt; np.linspace(0, 2, 9) # 9 numbers from 0 to 2<br>array([0.  , 0.25, 0.5 , 0.75, 1.  , 1.25, 1.5 , 1.75, 2.  ])<br>&gt;&gt;&gt; x = np.linspace(0, 2 * pi, 100) # useful to evaluate function at lots of points<br>&gt;&gt;&gt; f = np.sin(x)
+            </code>
+        </article>
+      </section>
+      <section class="main-section" id="Printing_Arrays">
+        <header>
+          Printing Arrays
+        </header>
+        <article>
+          <p>When you print an array, NumPy displays it in a similar way to nested
+            lists, but with the following layout:</p>
+          <ul>
+            <li>the last axis is printed from left to right,</li>
+            <li>the second-to-last is printed from top to bottom,</li>
+            <li>the rest are also printed from top to bottom, with each slice
+              separated from the next by an empty line.</li>
+          </ul>
+          <p>One-dimensional arrays are then printed as rows, bidimensionals as
+            matrices and tridimensionals as lists of matrices.</p>
+          <code>&gt;&gt;&gt; a = np.arange(6)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 1d array<br>&gt;&gt;&gt; print(a)<br>[0 1 2 3 4 5]<br>&gt;&gt;&gt;<br>&gt;&gt;&gt; b = np.arange(12).reshape(4, 3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 2d array<br>&gt;&gt;&gt; print(b)<br>[[ 0  1  2]<br>&nbsp;[ 3  4  5]<br>&nbsp;[ 6  7  8]<br>&nbsp;[ 9 10 11]]<br>&gt;&gt;&gt;<br>&gt;&gt;&gt; c = np.arange(24).reshape(2, 3, 4)&nbsp;&nbsp;# 3d array<br>&gt;&gt;&gt; print(c)<br>[[[ 0  1  2  3]<br>&nbsp;&nbsp;[ 4  5  6  7]<br>&nbsp;&nbsp;[ 8  9 10 11]]<br><br>&nbsp;[[12 13 14 15]<br>&nbsp;&nbsp;[16 17 18 19]<br>&nbsp;&nbsp;[20 21 22 23]]]</code>
+          <p>See below to get
+            more details on reshape.</p>
+          <p>If an array is too large to be printed, NumPy automatically skips the
+            central part of the array and only prints the corners:</p>
+          <code>&gt;&gt;&gt; print(np.arange(10000))<br>[   0    1    2 ... 9997 9998 9999]<br>&gt;&gt;&gt;<br>&gt;&gt;&gt; print(np.arange(10000).reshape(100, 100))<br>[[   0    1    2 ...   97   98   99]<br>&nbsp;[ 100  101  102 ...  197  198  199]<br>&nbsp;[ 200  201  202 ...  297  298  299]<br>&nbsp;...<br>&nbsp;[9700 9701 9702 ... 9797 9798 9799]<br>&nbsp;[9800 9801 9802 ... 9897 9898 9899]<br>&nbsp;[9900 9901 9902 ... 9997 9998 9999]]</code>
+          <p>To disable this behaviour and force NumPy to print the entire array, you
+            can change the printing options using set_printoptions.</p>
+          <code>&gt;&gt;&gt; np.set_printoptions(threshold=sys.maxsize)&nbsp;&nbsp;# sys module should be imported</code>
+        </article>
+      </section>
+      <section class="main-section" id="Basic_Operations">
+        <header>
+          Basic Operations
+        </header>
+        <article>
+          <p>Arithmetic operators on arrays apply elementwise. A new array is
+            created and filled with the result.</p>
+          <code>&gt;&gt;&gt; a = np.array([20, 30, 40, 50])<br>&gt;&gt;&gt; b = np.arange(4)<br>&gt;&gt;&gt; b</span><br>array([0, 1, 2, 3])<br>&gt;&gt;&gt; c = a - b<br>&gt;&gt;&gt; c<br>array([20, 29, 38, 47])<br>&gt;&gt;&gt; b**2<br>array([0, 1, 4, 9])<br>&gt;&gt;&gt; 10 * np.sin(a)<br>array([ 9.12945251, -9.88031624,  7.4511316 , -2.62374854])<br>&gt;&gt;&gt; a &lt; 35<br>array([ True,  True, False, False])</code>
+          <p>Unlike in many matrix languages, the product operator * operates elementwise in NumPy arrays. The matrix
+            product can be performed using the @ operator (in python >=3.5) or the dot function or method:</p>
+          <code>&gt;&gt;&gt; A = np.array([[1, 1],<br>...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0, 1]])<br>&gt;&gt;&gt; B = np.array([[2, 0],<br>...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3, 4]])<br>&gt;&gt;&gt; A * B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# elementwise product<br>array([[2, 0],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0, 4]])<br>&gt;&gt;&gt; A @ B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# matrix product<br>array([[5, 4],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3, 4]])<br>&gt;&gt;&gt; A.dot(B)&nbsp;&nbsp;# another matrix product<br>array([[5, 4],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3, 4]])</code>
+          <p>Some operations, such as += and *=, act in place to modify an existing array rather than create a new
+            one.</p>
+          <code>&gt;&gt;&gt; rg = np.random.default_rng(1)&nbsp;&nbsp;# create instance of default random number generator<br>&gt;&gt;&gt; a = np.ones((2, 3), dtype=int)<br>&gt;&gt;&gt; b = rg.random((2, 3))<br>&gt;&gt;&gt; a *= 3<br>&gt;&gt;&gt; a<br>array([[3, 3, 3],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3, 3, 3]])<br>&gt;&gt;&gt; b += a<br>&gt;&gt;&gt; b<br>array([[3.51182162, 3.9504637 , 3.14415961],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.94864945, 3.31183145, 3.42332645]])<br>&gt;&gt;&gt; a += b&nbsp;&nbsp;# b is not automatically converted to integer type<br>Traceback (most recent call last):<br>&nbsp;&nbsp;&nbsp;&nbsp;...<br>numpy.core._exceptions._UFuncOutputCastingError: Cannot cast ufunc &#39;add&#39; output from dtype(&#39;float64&#39;) to dtype(&#39;int64&#39;) with casting rule &#39;same_kind&#39;</code>
+          <p>When operating with arrays of different types, the type of the resulting
+            array corresponds to the more general or precise one (a behavior known
+            as upcasting).</p>
+          <code>&gt;&gt;&gt; a = np.ones(3, dtype=np.int32)<br>&gt;&gt;&gt; b = np.linspace(0, pi, 3)<br>&gt;&gt;&gt; b.dtype.name<br>&#39;float64&#39;<br>&gt;&gt;&gt; c = a + b<br>&gt;&gt;&gt; c<br>array([1.        , 2.57079633, 4.14159265])<br>&gt;&gt;&gt; c.dtype.name<br>&#39;float64&#39;<br>&gt;&gt;&gt; d = np.exp(c * 1j)<br>&gt;&gt;&gt; <br>array([ 0.54030231+0.84147098j, -0.84147098+0.54030231j,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-0.54030231-0.84147098j])<br>&gt;&gt;&gt; d.dtype.name<br>&#39;complex128&#39;</code>
+          <p>Many unary operations, such as computing the sum of all the elements in the array, are implemented as
+            methods of the ndarray class.</p>
+          <code>&gt;&gt;&gt; a = rg.random((2, 3))<br>&gt;&gt;&gt; a<br>array([[0.82770259, 0.40919914, 0.54959369],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0.02755911, 0.75351311, 0.53814331]])<br>&gt;&gt;&gt; a.sum()<br>3.1057109529998157<br>&gt;&gt;&gt; a.min()<br>0.027559113243068367<br>&gt;&gt;&gt; a.max()<br>0.8277025938204418</code>
+          <p>By default, these operations apply to the array as though it were a list of numbers, regardless of its
+            shape. However, by specifying the axis parameter you can apply an operation along the specified axis of an
+            array:</p>
+          <code>&gt;&gt;&gt; b = np.arange(12).reshape(3, 4)<br>&gt;&gt;&gt; b<br>array([[ 0,  1,  2,  3],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 4,  5,  6,  7],</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 8,  9, 10, 11]])<br>&gt;&gt;&gt;<br>&gt;&gt;&gt; b.sum(axis=0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# sum of each column<br>array([12, 15, 18, 21])<br>&gt;&gt;&gt;<br>&gt;&gt;&gt; b.min(axis=1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# min of each row<br>array([0, 4, 8])<br>&gt;&gt;&gt;<br>&gt;&gt;&gt; b.cumsum(axis=1)&nbsp;&nbsp;# cumulative sum along each row<br>array([[ 0,  1,  3,  6],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 4,  9, 15, 22],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 8, 17, 27, 38]])
+            </code>
+        </article>
+      </section>
+      <section class="main-section" id="Universal_Functions">
+        <header>
+          Universal Functions
+        </header>
+        <article>
+          <p>NumPy provides familiar mathematical functions such as sin, cos, and exp. In NumPy, these are called
+            “universal functions” (ufunc). Within NumPy, these functions operate elementwise on an array, producing an
+            array as output.</p>
+          <code>&gt;&gt;&gt; B = np.arange(3)<br>&gt;&gt;&gt; B<br>array([0, 1, 2])<br>&gt;&gt;&gt; np.exp(B)<br>array([1.        , 2.71828183, 7.3890561 ])<br>&gt;&gt;&gt; np.sqrt(B)<br>array([0.        , 1.        , 1.41421356])<br>&gt;&gt;&gt; C = np.array([2., -1., 4.])<br>&gt;&gt;&gt; np.add(B, C)<br>array([2., 0., 6.])
+            </code>
+        </article>
+      </section>
+      <section class="main-section" id="Indexing,_Slicing_and_Iterating">
+        <header>
+          Indexing, Slicing and Iterating
+        </header>
+        <article>
+          <p>One-dimensional arrays can be indexed, sliced and iterated over, much like lists and other Python
+            sequences.</p>
+          <code>&gt;&gt;&gt; a = np.arange(10)**3<br>&gt;&gt;&gt; a<br>array([  0,   1,   8,  27,  64, 125, 216, 343, 512, 729])<br>&gt;&gt;&gt; a[2]<br>8<br>&gt;&gt;&gt; a[2:5]<br>array([ 8, 27, 64])<br>&gt;&gt;&gt; # equivalent to a[0:6:2] = 1000;<br>&gt;&gt;&gt; # from start to position 6, exclusive, set every 2nd element to 1000<br>&gt;&gt;&gt; a[:6:2] = 1000<br>&gt;&gt;&gt; a<br>array([1000,    1, 1000,   27, 1000,  125,  216,  343,  512,  729])<br>&gt;&gt;&gt; a[::-1]&nbsp;&nbsp;# reversed a<br>array([ 729,  512,  343,  216,  125, 1000,   27, 1000,    1, 1000])<br>&gt;&gt;&gt; for i in a:<br>...&nbsp;&nbsp;&nbsp;&nbsp;print(i**(1 / 3.))<br>...<br>9.999999999999998<br>1.0<br>9.999999999999998<br>3.0<br>9.999999999999998<br>4.999999999999999<br>5.999999999999999<br>6.999999999999999<br>7.999999999999999<br>8.999999999999998</code>
+          <p>Multidimensional arrays can have one index per axis. These indices are given in a tuple separated by
+            commas:</p>
+          <code>&gt;&gt;&gt; def f(x, y):<br>...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 10 * x + y<br>...<br>&gt;&gt;&gt; b = np.fromfunction(f, (5, 4), dtype=int)<br>&gt;&gt;&gt; b<br>array([[ 0,  1,  2,  3],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[10, 11, 12, 13],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[20, 21, 22, 23],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[30, 31, 32, 33],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[40, 41, 42, 43]])<br>&gt;&gt;&gt; b[2, 3]<br>23<br>&gt;&gt;&gt; b[0:5, 1]&nbsp;&nbsp;# each row in the second column of b<br>array([ 1, 11, 21, 31, 41])<br>&gt;&gt;&gt; b[:, 1]&nbsp;&nbsp;&nbsp;&nbsp;# equivalent to the previous example<br>array([ 1, 11, 21, 31, 41])<br>&gt;&gt;&gt; b[1:3, :]&nbsp;&nbsp;# each column in the second and third row of b<br>array([[10, 11, 12, 13],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[20, 21, 22, 23]])</code>
+          <p>When fewer indices are provided than the number of axes, the missing
+            indices are considered complete slices</p>
+          <code>&gt;&gt;&gt; b[-1]&nbsp;&nbsp;&nbsp;# the last row. Equivalent to b[-1, :]<br>array([40, 41, 42, 43])</code>
+          <p>The expression within brackets in b[i] is treated as an i followed by as many instances of : as needed to
+            represent the remaining axes. NumPy also allows you to write this using dots as b[i, ...].</p>
+          <p>The dots (...) represent as many colons as needed to produce a complete indexing tuple. For example, if x
+            is an array with 5 axes, then</p>
+          <ul>
+            <li>x[1, 2, ...] is equivalent to x[1, 2, :, :, :],</li>
+            <li>x[..., 3] to x[:, :, :, :, 3] and</li>
+            <li>x[4, ..., 5, :] to x[4, :, :, 5, :].</li>
+          </ul>
+          <code>&gt;&gt;&gt; c = np.array([[[  0,  1,  2],&nbsp;&nbsp;# a 3D array (two stacked 2D arrays)<br>...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 10, 12, 13]],<br>...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[100, 101, 102],<br>...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[110, 112, 113]]])<br>&gt;&gt;&gt; c.shape<br>(2, 2, 3)<br>&gt;&gt;&gt; c[1, ...]&nbsp;&nbsp;# same as c[1, :, :] or c[1]<br>array([[100, 101, 102],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[110, 112, 113]])<br>&gt;&gt;&gt; c[..., 2]&nbsp;&nbsp;# same as c[:, :, 2]<br>array([[  2,  13],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[102, 113]])</code>
+          <p>Iterating over multidimensional arrays is done with respect to the first axis:</p>
+          <code>&gt;&gt;&gt; for row in b:<br>...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(row)<br>...<br>[0 1 2 3]<br>[10 11 12 13]<br>[20 21 22 23]<br>[30 31 32 33]<br>[40 41 42 43]</code>
+          <p>However, if one wants to perform an operation on each element in the array, one can use the flat
+            attribute which is an iterator over all the elements of the array:</p>
+          <code>&gt;&gt;&gt; for element in b.flat:<br>...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(element)<br>...<br>0<br>1<br>2<br>3<br>10<br>11<br>12<br>13<br>20<br>21<br>22<br>23<br>30<br>31<br>32<br>33<br>40<br>41<br>42<br>43</code>
+        </article>
+      </section>
+      <section class="main-section" id="Reference">
+        <header>
+          Reference
+        </header>
+        <article>
+          <p>All the documentation in this page is taken from <a
+              href="https://numpy.org/doc/stable/user/quickstart.html#the-basics" target="_blank">numpy.org</a>.
+          </p>
+        </article>
+      </section>
+    </article>
+
+  </main>
+</body>
+
+</html>

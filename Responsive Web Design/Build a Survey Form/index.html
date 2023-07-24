@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Survey Form</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1 id="title">Programation Skills Survey</h1>
+      <p id="description">What are your programation skills?</p>
+      <form id="survey-form">
+        <fieldset>
+          <p>Personal information</p>
+          <label for="name" id="name-label"
+            >Name
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Input your name..."
+              required
+          /></label>
+          <label for="email" id="email-label"
+            >Email
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Input your email..."
+              required
+          /></label>
+          <label for="number" id="number-label"
+            >Age
+            <input
+              type="number"
+              id="number"
+              name="age"
+              placeholder="Input your age..."
+              min="13"
+              max="120"
+              required
+          /></label>
+          <label for="gender"
+            >Gender
+            <select name="gender" id="dropdown" required>
+              <option value="">(select your gender)</option>
+              <option value="1">Male</option>
+              <option value="2">Female</option>
+              <option value="3">Other</option>
+            </select>
+          </label>
+        </fieldset>
+        <fieldset>
+          <p>Where did you learn to code first?</p>
+          <label for="self-learning"
+            ><input
+              type="radio"
+              name="learn"
+              value="self-learning"
+              class="inline"
+              checked
+            />Self Learning</label
+          >
+          <label for="abroad"
+            ><input
+              type="radio"
+              name="learn"
+              value="private-courses"
+              class="inline"
+            />Private Courses</label
+          >
+          <label for="abroad"
+            ><input
+              type="radio"
+              name="learn"
+              value="college"
+              class="inline"
+            />College</label
+          >
+          <label for="abroad"
+            ><input
+              type="radio"
+              name="learn"
+              value="other"
+              class="inline"
+            />Other</label
+          >
+        </fieldset>
+        <fieldset>
+          <p>Programation Languages</p>
+          <label for="javascript">
+            <input
+              type="checkbox"
+              name="programation-languages"
+              value="javascript"
+              class="inline"
+            />JavaScript</label
+          >
+          <label for="python">
+            <input
+              type="checkbox"
+              name="programation-languages"
+              value="python"
+              class="inline"
+            />Python</label
+          >
+          <label for="c++">
+            <input
+              type="checkbox"
+              name="programation-languages"
+              value="c++"
+              class="inline"
+            />C++</label
+          >
+          <label for="java">
+            <input
+              type="checkbox"
+              name="programation-languages"
+              value="java"
+              class="inline"
+            />Java</label
+          >
+          <label for="c#">
+            <input
+              type="checkbox"
+              name="programation-languages"
+              value="c#"
+              class="inline"
+            />C#</label
+          >
+          <label for="others">
+            <input
+              type="checkbox"
+              name="programation-languages"
+              value="others"
+              class="inline"
+            />Others</label
+          >
+        </fieldset>
+        <label for="obs"
+          >Observations
+          <textarea
+            name="obs"
+            id="obs"
+            cols="30"
+            rows="10"
+            placeholder="Observations..."
+          ></textarea>
+        </label>
+        <button type="submit" id="submit">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>
