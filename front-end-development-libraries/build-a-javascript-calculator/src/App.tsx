@@ -6,121 +6,44 @@ function App() {
   const [expression, setExpression] = useState("");
   const et = expression.trim();
 
-  enum Keys {
-    CLEAR,
-    NEGATIVE,
-    PERCENTAGE,
-    DIVIDE,
-    SEVEN,
-    EIGHT,
-    NINE,
-    MULTIPLY,
-    FOUR,
-    FIVE,
-    SIX,
-    SUBTRACT,
-    ONE,
-    TWO,
-    THREE,
-    ADD,
-    ZERO,
-    DECIMAL,
-    EQUALS,
-  }
-
-  const buttonPress = (symbol: Keys) => {
+  const buttonPress = (symbol: string) => {
     switch (symbol) {
-      case Keys.CLEAR:
+      case "clear":
         setAnswer("");
         setExpression("0");
         break;
-      case Keys.NEGATIVE:
+      case "negative":
         if (answer === "") return;
         setAnswer(
           answer.toString().charAt(0) === "-" ? answer.slice(1) : "-" + answer
         );
         break;
-      case Keys.PERCENTAGE:
+      case "percentage":
         if (answer === "") return;
         setAnswer((parseFloat(answer) / 100).toString());
         break;
-      case Keys.DIVIDE:
-        setExpression(et + " / ");
+      case "/":
+      case "*":
+      case "-":
+      case "+":
+        setExpression(et + " " + symbol + " ");
         break;
-      case Keys.MULTIPLY:
-        setExpression(et + " * ");
-        break;
-      case Keys.SUBTRACT:
-        setExpression(et + " - ");
-        break;
-      case Keys.ADD:
-        setExpression(et + " + ");
-        break;
-      case Keys.EQUALS:
+      case "=":
         calculate();
         break;
-      case Keys.ZERO:
-        if (expression.charAt(0) !== "0") setExpression(expression + "0");
+      case "0":
+        if (expression.charAt(0) !== "0") setExpression(expression + symbol);
         break;
-      case Keys.DECIMAL:
+      case ".":
         const lastNumber = expression.split(/[-+/*]/g).pop();
         if (lastNumber?.includes(".")) return;
-        setExpression(expression + ".");
+        setExpression(expression + symbol);
         break;
-      case Keys.NINE:
+      default:
         setExpression(
           (expression.charAt(0) === "0" ? expression.slice(1) : expression) +
-            "9"
+            symbol
         );
-        break;
-      case Keys.EIGHT:
-        setExpression(
-          (expression.charAt(0) === "0" ? expression.slice(1) : expression) +
-            "8"
-        );
-        break;
-      case Keys.SEVEN:
-        setExpression(
-          (expression.charAt(0) === "0" ? expression.slice(1) : expression) +
-            "7"
-        );
-        break;
-      case Keys.SIX:
-        setExpression(
-          (expression.charAt(0) === "0" ? expression.slice(1) : expression) +
-            "6"
-        );
-        break;
-      case Keys.FIVE:
-        setExpression(
-          (expression.charAt(0) === "0" ? expression.slice(1) : expression) +
-            "5"
-        );
-        break;
-      case Keys.FOUR:
-        setExpression(
-          (expression.charAt(0) === "0" ? expression.slice(1) : expression) +
-            "4"
-        );
-        break;
-      case Keys.THREE:
-        setExpression(
-          (expression.charAt(0) === "0" ? expression.slice(1) : expression) +
-            "3"
-        );
-        break;
-      case Keys.TWO:
-        setExpression(
-          (expression.charAt(0) === "0" ? expression.slice(1) : expression) +
-            "2"
-        );
-        break;
-      case Keys.ONE:
-        setExpression(
-          (expression.charAt(0) === "0" ? expression.slice(1) : expression) +
-            "1"
-        );
-        break;
     }
   };
 
@@ -156,133 +79,129 @@ function App() {
           <button
             id="clear"
             className="light-gray"
-            onClick={() => buttonPress(Keys.CLEAR)}
+            onClick={() => buttonPress("clear")}
           >
             C
           </button>
           <button
             id="negative"
             className="light-gray"
-            onClick={() => buttonPress(Keys.NEGATIVE)}
+            onClick={() => buttonPress("negative")}
           >
             +/-
           </button>
           <button
             id="percentage"
             className="light-gray"
-            onClick={() => buttonPress(Keys.PERCENTAGE)}
+            onClick={() => buttonPress("percentage")}
           >
             %
           </button>
           <button
             id="divide"
             className="yellow"
-            onClick={() => buttonPress(Keys.DIVIDE)}
+            onClick={() => buttonPress("/")}
           >
             /
           </button>
           <button
             id="seven"
             className="dark-gray"
-            onClick={() => buttonPress(Keys.SEVEN)}
+            onClick={() => buttonPress("7")}
           >
             7
           </button>
           <button
             id="eight"
             className="dark-gray"
-            onClick={() => buttonPress(Keys.EIGHT)}
+            onClick={() => buttonPress("8")}
           >
             8
           </button>
           <button
             id="nine"
             className="dark-gray"
-            onClick={() => buttonPress(Keys.NINE)}
+            onClick={() => buttonPress("9")}
           >
             9
           </button>
           <button
             id="multiply"
             className="yellow"
-            onClick={() => buttonPress(Keys.MULTIPLY)}
+            onClick={() => buttonPress("*")}
           >
             *
           </button>
           <button
             id="four"
             className="dark-gray"
-            onClick={() => buttonPress(Keys.FOUR)}
+            onClick={() => buttonPress("4")}
           >
             4
           </button>
           <button
             id="five"
             className="dark-gray"
-            onClick={() => buttonPress(Keys.FIVE)}
+            onClick={() => buttonPress("5")}
           >
             5
           </button>
           <button
             id="six"
             className="dark-gray"
-            onClick={() => buttonPress(Keys.SIX)}
+            onClick={() => buttonPress("6")}
           >
             6
           </button>
           <button
             id="subtract"
             className="yellow"
-            onClick={() => buttonPress(Keys.SUBTRACT)}
+            onClick={() => buttonPress("-")}
           >
             -
           </button>
           <button
             id="one"
             className="dark-gray"
-            onClick={() => buttonPress(Keys.ONE)}
+            onClick={() => buttonPress("1")}
           >
             1
           </button>
           <button
             id="two"
             className="dark-gray"
-            onClick={() => buttonPress(Keys.TWO)}
+            onClick={() => buttonPress("2")}
           >
             2
           </button>
           <button
             id="three"
             className="dark-gray"
-            onClick={() => buttonPress(Keys.THREE)}
+            onClick={() => buttonPress("3")}
           >
             3
           </button>
-          <button
-            id="add"
-            className="yellow"
-            onClick={() => buttonPress(Keys.ADD)}
-          >
+          <button id="add" className="yellow" onClick={() => buttonPress("+")}>
             +
           </button>
           <button
             id="zero"
             className="dark-gray"
-            onClick={() => buttonPress(Keys.ZERO)}
+            onClick={() => buttonPress("0")}
           >
             0
           </button>
           <button
             id="decimal"
             className="dark-gray"
-            onClick={() => buttonPress(Keys.DECIMAL)}
+            onClick={() => buttonPress(".")}
           >
             .
           </button>
           <button
             id="equals"
             className="yellow"
-            onClick={() => buttonPress(Keys.EQUALS)}
+            onClick={() => buttonPress("=")}
           >
             =
           </button>
