@@ -1,14 +1,13 @@
 import { useState } from "react";
-import quotes from "./assets/quotes.json";
 import { FaTwitter, FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
 import "./App.css";
 
-interface Quote {
+export interface Quote {
   quote: string;
   author: string;
 }
 
-const getRandomQuote = (): Quote => {
+const getRandomQuote = (quotes: Quote[]): Quote => {
   return quotes[Math.floor(Math.random() * quotes.length)];
 };
 
@@ -22,12 +21,17 @@ const getRandomColor = (): string => {
 
 const transition = "all 1s";
 
-function App() {
-  const [quote, setQuote] = useState<Quote>(getRandomQuote());
+interface QuoteProps {
+  quotes: Quote[];
+}
+
+function App({ quotes }: QuoteProps) {
+
+  const [quote, setQuote] = useState<Quote>(getRandomQuote(quotes));
   const [randomColor, setRandomColor] = useState<string>(getRandomColor());
 
   const changeQuote = () => {
-    setQuote(getRandomQuote());
+    setQuote(getRandomQuote(quotes));
     setRandomColor(getRandomColor());
   };
 
