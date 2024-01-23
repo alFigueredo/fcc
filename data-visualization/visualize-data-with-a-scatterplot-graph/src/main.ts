@@ -18,7 +18,7 @@ const color = d3.scaleOrdinal(d3.schemeCategory10);
 
 const xAxis = d3.axisBottom(x).tickFormat(d3.format("d"));
 
-const timeFormat = d3.timeFormat("%M:%S")
+const timeFormat = d3.timeFormat("%M:%S");
 
 const yAxis = d3.axisLeft<Date>(y).tickFormat(timeFormat);
 
@@ -50,27 +50,40 @@ fetch(
   .catch((e) => console.log(e));
 
 interface Runner {
-  Time: String,
-  RaceTime: Date,
-  Place: Number,
-  Seconds: Number,
-  Name: String,
-  Year: number,
-  Nationality: String,
-  Doping: String,
-  URL: String
+  Time: String;
+  RaceTime: Date;
+  Place: Number;
+  Seconds: Number;
+  Name: String;
+  Year: number;
+  Nationality: String;
+  Doping: String;
+  URL: String;
 }
 
 const build = (data: [Runner]) => {
   data.forEach((d: Runner) => {
     d.Place = +d.Place;
     let parsedTime = d.Time.split(":");
-    d.RaceTime = new Date(1970, 0, 1, 0, parseInt(parsedTime[0]), parseInt(parsedTime[1]));
+    d.RaceTime = new Date(
+      1970,
+      0,
+      1,
+      0,
+      parseInt(parsedTime[0]),
+      parseInt(parsedTime[1])
+    );
   });
-  x.domain([Number(d3.min(data, (d) => d.Year - 1)), Number(d3.max(data, (d) => d.Year + 1))]);
+  x.domain([
+    Number(d3.min(data, (d) => d.Year - 1)),
+    Number(d3.max(data, (d) => d.Year + 1)),
+  ]);
 
   // y.domain(d3.extent(data, (d) => d.RaceTime));
-  y.domain([Number(d3.min(data, (d) => d.RaceTime)), Number(d3.max(data, (d) => d.RaceTime))]);
+  y.domain([
+    Number(d3.min(data, (d) => d.RaceTime)),
+    Number(d3.max(data, (d) => d.RaceTime)),
+  ]);
   svg
     .append("g")
     .attr("class", "x axis")
@@ -114,7 +127,7 @@ const build = (data: [Runner]) => {
     .attr("r", 6)
     .attr("cx", (d) => x(d.Year))
     .attr("cy", (d) => y(d.RaceTime))
-    .attr("data-xvalue", d => d.Year)
+    .attr("data-xvalue", (d) => d.Year)
     .attr("data-yvalue", (d) => d.RaceTime)
     .style("fill", (d) => color(d.Doping ? "True" : ""))
     .on("mouseover", function (event, d) {
@@ -166,7 +179,7 @@ const build = (data: [Runner]) => {
     .attr("x", width - 18)
     .attr("width", 18)
     .attr("height", 18)
-    .style("fill", color)
+    .style("fill", color);
 
   legend
     .append("text")
@@ -174,5 +187,7 @@ const build = (data: [Runner]) => {
     .attr("y", 9)
     .attr("dy", ".35em")
     .style("text-anchor", "end")
-    .text((d) => d ? "Riders with doping allegations" : "No doping allegations");
+    .text((d) =>
+      d ? "Riders with doping allegations" : "No doping allegations"
+    );
 };
