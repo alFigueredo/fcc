@@ -114,7 +114,7 @@ const build = (data: [Runner]) => {
     .attr("r", 6)
     .attr("cx", (d) => x(d.Year))
     .attr("cy", (d) => y(d.RaceTime))
-    .attr("data-xvalue", (d) => d.Year)
+    .attr("data-xvalue", d => d.Year)
     .attr("data-yvalue", (d) => d.RaceTime)
     .style("fill", (d) => color(d.Doping ? "True" : ""))
     .on("mouseover", function (event, d) {
@@ -157,7 +157,7 @@ const build = (data: [Runner]) => {
     .data(color.domain())
     .enter()
     .append("g")
-    .attr("transform", function (d, i) {
+    .attr("transform", function (_, i) {
       return `translate(0, ${height / 2 - i * 20})`;
     });
 
