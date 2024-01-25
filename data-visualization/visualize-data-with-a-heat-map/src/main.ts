@@ -52,13 +52,6 @@ const build = (data: GlobalTemperature) => {
     top: 1 * fontSize,
     bottom: 8 * fontSize,
   };
-  // const tip = d3
-  //   .tip()
-  //   .attr("class", "d3-tip")
-  //   .attr("id", "tooltip")
-  //   .html((d: Tooltip) => d)
-  //   .direction("n")
-  //   .offset([-10, 0])
 
   const tip = section
     .append("div")
