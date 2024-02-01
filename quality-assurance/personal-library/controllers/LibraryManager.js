@@ -57,7 +57,6 @@ function LibraryManager() {
       if (!book) throw "no book exists";
       done(null, "delete successful");
     } catch (err) {
-      console.error(err);
       done(err);
     }
   };
