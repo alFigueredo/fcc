@@ -22,7 +22,7 @@
     "mocha": "^10.2.0"
   },
   "license": "MIT",
-  "dev_dependencies": {
+  "devDependencies": {
     "nodemon": "^2.0.4"
   }
 }
