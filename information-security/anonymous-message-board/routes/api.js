@@ -66,7 +66,7 @@ module.exports = function (app) {
           } else {
             res.status(200).redirect(`/b/${board}/${thread_id}/`);
           }
-        },
+        }
       );
     })
     .get((req, res) => {
@@ -94,7 +94,7 @@ module.exports = function (app) {
           } else {
             res.status(200).send("success");
           }
-        },
+        }
       );
     })
     .put((req, res) => {

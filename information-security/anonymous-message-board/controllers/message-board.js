@@ -75,7 +75,7 @@ class MessageBoard {
       if (board !== thread.board) throw Error("Board does not match");
       const result = await bcrypt.compare(
         delete_password,
-        thread.delete_password,
+        thread.delete_password
       );
       if (result) {
         thread.replies.forEach(async (reply) => {
@@ -99,14 +99,14 @@ class MessageBoard {
       if (!reply) throw Error("Reply does not exist");
       const result = await bcrypt.compare(
         delete_password,
-        reply.delete_password,
+        reply.delete_password
       );
       if (result) {
         reply.text = "[deleted]";
         await reply.save();
         done(null);
         thread.replies = thread.replies.map((item) =>
-          item._id.toString() === reply_id ? reply : item,
+          item._id.toString() === reply_id ? reply : item
         );
         await thread.save();
       } else {
