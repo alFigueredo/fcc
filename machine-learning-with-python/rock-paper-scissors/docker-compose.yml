@@ -1,0 +1,5 @@
+services:
+  python-app:
+    build:
+      context: .
+    command: python3 ./main.py
